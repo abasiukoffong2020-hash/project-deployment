@@ -1,7 +1,7 @@
 # Loan Approval Prediction
 
 This project contains:
-- a Streamlit app (`app (1).py`) to interactively predict loan approval
+- a Streamlit app (`app.py`) to interactively predict loan approval
 - a FastAPI endpoint (`api.py`) for programmatic predictions
 - pretrained artifacts: `loan_model.pkl` and `scaler_top5.pkl`
 
@@ -18,13 +18,22 @@ python -m pip install -r requirements.txt
 2. Run Streamlit UI:
 
 ```bash
-python -m streamlit run "app (1).py"
+python -m streamlit run app.py
 ```
 
 3. Run FastAPI (optional):
 
 ```bash
 uvicorn api:app --reload
+```
+
+## Optional deploy helper
+
+You can also use `deploy.sh` to push this repository to GitHub and prepare it for Streamlit Cloud.
+
+```bash
+chmod +x deploy.sh
+./deploy.sh https://github.com/<your-username>/<your-repo>.git
 ```
 
 ---
@@ -49,9 +58,11 @@ git branch -M main
 git push -u origin main
 ```
 
-3. On Streamlit Cloud (https://share.streamlit.io/) sign in with your GitHub account and click **New app** → choose your repo and branch (`main`) and set the main file to `app (1).py`.
+3. On Streamlit Cloud (https://share.streamlit.io/) sign in with your GitHub account and click **New app** → choose your repo and branch (`main`) and set the main file to `app.py`.
 
 4. Click **Deploy**. Streamlit Cloud will install dependencies from `requirements.txt` and start the app. Model artifacts (`loan_model.pkl` and `scaler_top5.pkl`) must be committed to the repo so the app can load them at runtime.
+
+> Streamlit Cloud requires you to sign in with your own GitHub account. I cannot sign in on your behalf, but the app will deploy once you connect your GitHub repo and authorize Streamlit Cloud.
 
 Notes & tips for smooth deployment:
 - Ensure `requirements.txt` lists all dependencies (already included). If a package needs a specific version, pin it (e.g., `streamlit==1.58.0`).
@@ -62,13 +73,13 @@ Notes & tips for smooth deployment:
 ---
 
 ## Files of interest
-- `app (1).py` — Streamlit frontend
+- `app.py` — Streamlit frontend
 - `api.py` — FastAPI backend with `/predict` endpoint
 - `loan_model.pkl`, `scaler_top5.pkl` — model artifacts
 - `requirements.txt` — dependency list used by Streamlit Cloud
 
 If you'd like, I can:
-- create a small `deploy.sh` script to automate git push steps,
+- help you connect the repo to Streamlit Cloud in your browser,
 - add Git LFS instructions if model files are large,
 - or test the Streamlit app locally in this environment.
 
